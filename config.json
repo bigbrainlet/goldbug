@@ -1,5 +1,6 @@
 {
     "metals": ["gold", "silver", "platinum", "palladium"],
+    "cache_update": 300,
     "price_data": {
         "enabled": true,
         "sources": {

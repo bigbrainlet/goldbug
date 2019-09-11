@@ -4,6 +4,7 @@ import glob
 import json
 import os
 import re
+import time
 
 import requests
 
@@ -14,6 +15,7 @@ from common import list_sum
 
 filepaths = {
         'config': 'config.json',
+        'cache': '.cache.json',
         'order_dir': 'orders',
         'data_dir': 'data',
         }
@@ -22,9 +24,23 @@ filepaths = {
 def main():
     with open(filepaths['config'], 'r') as f:
         config = json.load(f)
-    price_data = {}
-    if config['price_data']['enabled']:
-        price_data = get_price_data(config['metals'], config['price_data']['sources'])
+    try:
+        with open(filepaths['cache'], 'r') as f:
+            cache = json.load(f)
+    except FileNotFoundError:
+        cache = {}
+
+    price_data = cache.get('price_data', {})
+    if (abs(time.time() - cache.get('updated', 0)) > config['cache_update'] or
+            not cache.get('price_data', None)):
+        # Necessary to retrieve price data
+        cache['updated'] = time.time()
+        if config['price_data']['enabled']:
+            price_data = get_price_data(config['metals'], config['price_data']['sources'])
+            cache['price_data'] = price_data
+            with open(filepaths['cache'], 'w') as f:
+                json.dump(cache, f)
+
     print('Current prices (USD/oz)')
     for metal in config['metals']:
         print('{}: {}'.format(metal, price_data.get(metal, 'N/A')))

@@ -1,4 +1,6 @@
 orders/
 __pycache__/
 
+.cache.json
+
 *.swp
