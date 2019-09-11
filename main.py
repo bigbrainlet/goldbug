@@ -44,6 +44,13 @@ def main():
     account_value = sum([order.value() for order in orders])
     print('Total account value: ${}'.format(account_value))
 
+    metal_holdings = dict(
+            [(metal, sum([order.quantity(metal) for order in orders]))
+                for metal in config['metals']])
+    print('Metal holdings:')
+    for metal in config['metals']:
+        print('{}: {}oz'.format(metal, metal_holdings[metal]))
+
 
 def get_price_data(metals, sources):
     '''
