@@ -41,7 +41,7 @@ def main():
     Order.set_price_data(price_data)
     Order.set_assets(assets)
 
-    account_value = sum([order.value() for order in orders])
+    account_value = round(sum([order.value() for order in orders]), 2)
     print('Total account value: ${}'.format(account_value))
 
     metal_holdings = dict(
