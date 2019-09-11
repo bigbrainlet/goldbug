@@ -1,0 +1,23 @@
+[
+    {
+        "token": "US_KHD_1964",
+        "desc": "Kennedy Half Dollar - 1964",
+        "metal": "silver",
+        "purity": 0.90,
+        "weight": 0.4409245
+    },
+    {
+        "token": "US_KHD_1965-1970",
+        "desc": "Kennedy Half Dollar - 1965-1970",
+        "metal": "silver",
+        "purity": 0.40,
+        "weight": 0.4056506
+    },
+    {
+        "token": "US_SWN",
+        "desc": "US World War II Nickel - 1942-1945",
+        "metal": "silver",
+        "purity": 0.35,
+        "weight": 0.17637
+    }
+]
