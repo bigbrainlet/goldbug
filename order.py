@@ -7,6 +7,14 @@ class Order(JSONSerialized):
     '''
     Represents a group of metal purchases.
     '''
+    @staticmethod
+    def set_price_data(price_data):
+        OrderContents.price_data = price_data
+
+    @staticmethod
+    def set_assets(assets):
+        OrderContents.assets = assets
+
     @classmethod
     def from_dict(cls, dict_in):
         # Adjust json contents (list) to obj list

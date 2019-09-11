@@ -1,8 +1,30 @@
-{
-    "bullion": {
-        "desc": "Miscellaneous quantities of bullion",
-        "metals": ["gold", "silver", "platinum", "palladium"],
+[    
+    {
+        "token": "gold",
+        "desc": "Miscellaneous quantities of gold",
+        "metal": "gold",
+        "purity": 1.0,
+        "weight": 1.0
+    },
+    {
+        "token": "silver",
+        "desc": "Miscellaneous quantities of silver",
+        "metal": "silver",
+        "purity": 1.0,
+        "weight": 1.0
+    },
+    {
+        "token": "platinum",
+        "desc": "Miscellaneous quantities of platinum",
+        "metal": "platinum",
+        "purity": 1.0,
+        "weight": 1.0
+    },
+    {
+        "token": "palladium",
+        "desc": "Miscellaneous quantities of palladium",
+        "metal": "palladium",
         "purity": 1.0,
         "weight": 1.0
     }
-}
+]
