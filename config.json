@@ -1,6 +1,6 @@
 {
-    "metals": ["gold", "silver", "platinum", "palladium"],
-    "cache_update": 300,
+    "metals": ["gold", "silver", "platinum", "palladium", "rhodium"],
+    "cache_update": 60,
     "price_data": {
         "enabled": true,
         "sources": {
@@ -10,7 +10,8 @@
                     "gold": "AU",
                     "silver": "AG",
                     "platinum": "PT",
-                    "palladium": "PD"
+                    "palladium": "PD",
+                    "rhodium": "RH"
                 },
                 "regex": {
                     "default":
