@@ -1,0 +1,21 @@
+{
+    "metals": ["gold", "silver", "platinum", "palladium"],
+    "price_data": {
+        "enabled": true,
+        "sources": {
+            "kitco": {
+                "url": "https://www.kitco.com/market/",
+                "symbol": {
+                    "gold": "AU",
+                    "silver": "AG",
+                    "platinum": "PT",
+                    "palladium": "PD"
+                },
+                "regex": {
+                    "default":
+                        "\"{0}-bid\">(?P<bid>\\d+\\.\\d+).*?\"{0}-ask\">(?P<ask>\\d+\\.\\d+)"
+                }
+            }
+        }
+    }
+}

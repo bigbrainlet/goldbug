@@ -1,0 +1,8 @@
+{
+    "bullion": {
+        "desc": "Miscellaneous quantities of bullion",
+        "metals": ["gold", "silver", "platinum", "palladium"],
+        "purity": 1.0,
+        "weight": 1.0
+    }
+}
