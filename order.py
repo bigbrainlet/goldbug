@@ -24,6 +24,12 @@ class Order(JSONSerialized):
     def __init__(self, content):
         self.content = content
 
+    def value(self):
+        '''
+        Return total value (USD) of order.
+        '''
+        return sum([content.value() for content in self.content])
+
 class OrderContents(JSONSerialized):
     '''
     Represents a single asset being purchased within an order.
@@ -32,6 +38,20 @@ class OrderContents(JSONSerialized):
         self.asset = asset
         self.quantity = quantity
         self.rate = rate
+
+    def value(self):
+        '''
+        Return value of contents based on current spot price.
+        '''
+        asset = self.get_asset()
+        return (
+                self.__class__.price_data[asset.metal] *
+                asset.purity *
+                asset.weight *
+                self.quantity)
+
+    def get_asset(self):
+        return self.__class__.assets[self.asset]
 
 
 if __name__ == '__main__':

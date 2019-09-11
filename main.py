@@ -34,11 +34,15 @@ def main():
 
     assets = list_sum(
             [Asset.from_json_list_file(asset_file) for asset_file in asset_files])
+    assets = Asset.to_dict(assets)
     orders = list_sum(
             [Order.from_json_list_file(order_file) for order_file in order_files])
 
     Order.set_price_data(price_data)
     Order.set_assets(assets)
+
+    account_value = sum([order.value() for order in orders])
+    print('Total account value: ${}'.format(account_value))
 
 
 def get_price_data(metals, sources):
