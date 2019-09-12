@@ -2,8 +2,9 @@
     {
         "token": "EU_AUS_DUCAT",
         "desc": "Austrian/Dutch gold ducat, restrike - late 1800's-early 1900's",
-        "metal": "gold",
-        "purity": 0.986,
+        "composition": {
+            "gold": 0.986
+        },
         "weight": 0.11060
     }
 ]

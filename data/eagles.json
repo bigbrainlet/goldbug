@@ -1,0 +1,46 @@
+[
+    {
+        "token": "US_SILVER_EAGLE",
+        "desc": "American Silver Eagle 1oz",
+        "composition": {
+            "silver": 0.999
+        },
+        "weight": 1.0
+    },
+    {
+        "token": "US_GOLD_EAGLE",
+        "desc": "American Gold Eagle 1oz",
+        "composition": {
+            "gold": 0.9167,
+            "silver": 0.03
+        },
+        "weight": 1.0909
+    },
+    {
+        "token": "US_GOLD_EAGLE_1/2oz",
+        "desc": "American Gold Eagle 1/2oz",
+        "composition": {
+            "gold": 0.9167,
+            "silver": 0.03
+        },
+        "weight": 0.5454
+    },
+    {
+        "token": "US_GOLD_EAGLE_1/4oz",
+        "desc": "American Gold Eagle 1/4oz",
+        "composition": {
+            "gold": 0.9167,
+            "silver": 0.03
+        },
+        "weight": 0.2727
+    },
+    {
+        "token": "US_GOLD_EAGLE_1/10oz",
+        "desc": "American Gold Eagle 1/10oz",
+        "composition": {
+            "gold": 0.9167,
+            "silver": 0.03
+        },
+        "weight": 0.1091
+    }
+]
