@@ -14,8 +14,17 @@ class Account:
 
     sep_str = '=' * 30
     label_fmt = '{0: <12}'
-    number_fmt = '{1: >10}'
+    number_fmt = '{1: >12}'
     amt_fmt = '] {}:{}'
+
+    @classmethod
+    def set_price_data(cls, price_data):
+        cls.price_data = price_data
+        Order.set_price_data(cls.price_data)
+
+    @classmethod
+    def set_config(cls, config):
+        cls.config = config
 
     def __init__(self, orders, assets):
         self.orders = orders
@@ -31,12 +40,28 @@ class Account:
                 self.__class__.number_fmt)
         cost = self.cost()
         value = self.value()
+        profit = value - cost
+        if profit < 0:
+            profit = '({})'.format(abs(profit))
+            if len(profit) < 13:
+                profit = ' ' * (13-len(profit)) + profit
         to_print = [
                 sep,
-                'Account total',
+                'Account total (USD)',
                 fmt.format('investment', cost),
                 fmt.format('value', value),
-                fmt.format('profit', value - cost),
+                fmt.format('profit', profit),
+                sep,
+                'Holdings (Troy oz)',
+                *[fmt.format(metal, self.holding(metal))
+                    for metal in self.__class__.config['metals']],
+                sep,
+                'Price data (USD/Troy oz)',
+                *[fmt.format(metal,
+                    round(self.__class__.price_data.get(metal, 0),
+                        self.__class__.PRICE_ROUND))
+                    for metal in
+                    self.__class__.price_data],
                 sep,]
         print('\n'.join(to_print))
 

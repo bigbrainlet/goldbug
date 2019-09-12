@@ -22,6 +22,8 @@ def main():
 
     PriceCache.config = config
     price_cache = PriceCache.read()
+    Account.set_price_data(price_cache.price_data)
+    Account.set_config(config)
 
     asset_dir = os.path.join(filepaths['data_dir'], '*.json')
     order_dir = os.path.join(filepaths['order_dir'], '*.json')
@@ -34,7 +36,6 @@ def main():
     orders = list_sum(
             [Order.from_json_list_file(order_file) for order_file in order_files])
 
-    Order.set_price_data(price_cache.price_data)
     Order.set_assets(assets)
 
     account = Account(orders, assets)

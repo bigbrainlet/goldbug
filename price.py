@@ -43,6 +43,7 @@ class PriceCache(JSONSerialized):
         '''
         Retrieve and set new price data.
         '''
+        self.updated = time.time()
         self.get_price_data()
 
     def get_price_data(self):
