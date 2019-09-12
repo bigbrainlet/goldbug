@@ -12,10 +12,9 @@ class Asset(JSONSerialized):
     def to_list(asset_dict):
         return list(asset_dict.values())
 
-    def __init__(self, token, metal, purity, weight, desc=''):
+    def __init__(self, token, composition, weight, desc=''):
         self.token = token
-        self.metal = metal
-        self.purity = purity
+        self.composition = composition
         self.weight = weight
         self.desc = desc
 

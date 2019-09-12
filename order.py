@@ -34,9 +34,7 @@ class Order(JSONSerialized):
         '''
         Return the total quantity of given metal in this order.
         '''
-        applicable = [content for content in self.content if
-                content.get_asset().metal == metal]
-        return sum([each.metal_content() for each in applicable])
+        return sum([each.metal_content(metal) for each in self.content])
 
 class OrderContents(JSONSerialized):
     '''
@@ -52,18 +50,17 @@ class OrderContents(JSONSerialized):
         Return value of contents based on current spot price.
         '''
         asset = self.get_asset()
-        return (
-                self.__class__.price_data[asset.metal] *
-                asset.purity *
-                asset.weight *
-                self.quantity)
+        return (sum(
+                [self.__class__.price_data.get(metal, 0) * purity for
+                    metal, purity in asset.composition.items()]) *
+                asset.weight * self.quantity)
 
-    def metal_content(self):
+    def metal_content(self, metal):
         '''
         Return the total (pure) metal in oz.
         '''
         asset = self.get_asset()
-        return asset.weight * self.quantity
+        return asset.composition.get(metal, 0) * asset.weight * self.quantity
 
     def get_asset(self):
         return self.__class__.assets[self.asset]
