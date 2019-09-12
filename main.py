@@ -48,8 +48,10 @@ def main():
         print('] {0: <12}:{1}'.format(metal, price_data.get(metal, 'N/A')))
     print(spacer_str)
 
-    asset_files = glob.glob('{}/*.json'.format(filepaths['data_dir']))
-    order_files = glob.glob('{}/*.json'.format(filepaths['order_dir']))
+    asset_dir = os.path.join(filepaths['data_dir'], '*.json')
+    order_dir = os.path.join(filepaths['order_dir'], '*.json')
+    asset_files = glob.glob(asset_dir)
+    order_files = glob.glob(order_dir)
 
     assets = list_sum(
             [Asset.from_json_list_file(asset_file) for asset_file in asset_files])
