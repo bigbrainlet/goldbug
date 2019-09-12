@@ -1,6 +1,59 @@
 #!/usr/bin/env python3
 
+from decimal import Decimal
+
 from common import JSONSerialized
+
+
+class Account:
+    '''
+    Manages a group of orders.
+    '''
+    QUANTITY_ROUND = 4
+    PRICE_ROUND = 2
+
+    sep_str = '=' * 30
+    label_fmt = '{0: <12}'
+    number_fmt = '{1: >10}'
+    amt_fmt = '] {}:{}'
+
+    def __init__(self, orders, assets):
+        self.orders = orders
+        self.assets = assets
+
+    def print_summary(self):
+        '''
+        Print a pretty account summary.
+        '''
+        sep = self.__class__.sep_str
+        fmt = self.__class__.amt_fmt.format(
+                self.__class__.label_fmt,
+                self.__class__.number_fmt)
+        cost = self.cost()
+        value = self.value()
+        to_print = [
+                sep,
+                'Account total',
+                fmt.format('investment', cost),
+                fmt.format('value', value),
+                fmt.format('profit', value - cost),
+                sep,]
+        print('\n'.join(to_print))
+
+    def holding(self, metal):
+        '''
+        Return the quantity of a metal being held.
+        '''
+        return round(sum([order.quantity(metal) for order in self.orders]),
+                self.__class__.QUANTITY_ROUND)
+
+    def cost(self):
+        return round(sum([order.cost() for order in self.orders]),
+                self.__class__.PRICE_ROUND)
+
+    def value(self):
+        return round(sum([order.value() for order in self.orders]),
+                self.__class__.PRICE_ROUND)
 
 
 class Order(JSONSerialized):
@@ -23,8 +76,8 @@ class Order(JSONSerialized):
 
     def __init__(self, content, tax=0.0, ship=0.0):
         self.content = content
-        self.tax = tax
-        self.ship = ship
+        self.tax = Decimal(tax)
+        self.ship = Decimal(ship)
 
     def cost(self):
         return round(
@@ -52,8 +105,8 @@ class OrderContents(JSONSerialized):
     '''
     def __init__(self, asset, quantity, rate):
         self.asset = asset
-        self.quantity = quantity
-        self.rate = rate
+        self.quantity = Decimal(quantity)
+        self.rate = Decimal(rate)
 
     def value(self):
         '''
@@ -61,7 +114,7 @@ class OrderContents(JSONSerialized):
         '''
         asset = self.get_asset()
         return (sum(
-                [self.__class__.price_data.get(metal, 0) * purity for
+                [self.__class__.price_data.get(metal, Decimal(0.0)) * purity for
                     metal, purity in asset.composition.items()]) *
                 asset.weight * self.quantity)
 
@@ -73,7 +126,7 @@ class OrderContents(JSONSerialized):
         Return the total (pure) metal in oz.
         '''
         asset = self.get_asset()
-        return asset.composition.get(metal, 0) * asset.weight * self.quantity
+        return asset.composition.get(metal, Decimal(0.0)) * asset.weight * self.quantity
 
     def get_asset(self):
         return self.__class__.assets[self.asset]

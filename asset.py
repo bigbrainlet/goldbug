@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+from decimal import Decimal
+
 from common import JSONSerialized
 
 
 class Asset(JSONSerialized):
-    G_TO_TROY_OZ = 0.0321507
+    G_TO_TROY_OZ = Decimal(0.0321507)
 
     @staticmethod
     def to_dict(asset_list):
@@ -16,8 +18,9 @@ class Asset(JSONSerialized):
 
     def __init__(self, token, composition, mass, desc=''):
         self.token = token
-        self.composition = composition
-        self.mass = mass
+        self.composition = dict(
+                [(comp, Decimal(purity)) for comp, purity in composition.items()])
+        self.mass = Decimal(mass)
         self.weight = self.mass * self.__class__.G_TO_TROY_OZ
         self.desc = desc
 
