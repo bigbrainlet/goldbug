@@ -1,5 +1,13 @@
 [
     {
+        "token": "US_SLV_WASH_QTR",
+        "desc": "Silver Washington Quarter - pre-1965",
+        "composition": {
+            "silver": 0.90
+        },
+        "weight": 0.2204623
+    },
+    {
         "token": "US_KHD_1964",
         "desc": "Kennedy Half Dollar - 1964",
         "composition": {

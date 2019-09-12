@@ -1,0 +1,10 @@
+[
+    {
+        "token": "EU_GB_SOV",
+        "desc": "British gold sovereign bullion coin",
+        "composition": {
+            "gold": 0.917
+        },
+        "weight": 0.28177017175
+    }
+]
