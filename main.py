@@ -41,9 +41,12 @@ def main():
             with open(filepaths['cache'], 'w') as f:
                 json.dump(cache, f)
 
+    spacer_str = '========================='
+    print(spacer_str)
     print('Current prices (USD/oz)')
     for metal in config['metals']:
-        print('{}: {}'.format(metal, price_data.get(metal, 'N/A')))
+        print('] {0: <12}:{1}'.format(metal, price_data.get(metal, 'N/A')))
+    print(spacer_str)
 
     asset_files = glob.glob('{}/*.json'.format(filepaths['data_dir']))
     order_files = glob.glob('{}/*.json'.format(filepaths['order_dir']))
@@ -57,17 +60,22 @@ def main():
     Order.set_price_data(price_data)
     Order.set_assets(assets)
 
+    account_cost = round(sum([order.cost() for order in orders]), 2)
     account_value = round(sum([order.value() for order in orders]), 2)
-    account_cost = sum([order.cost() for order in orders])
-    print('Total account value: ${}'.format(account_value))
-    print('Total account cost: ${}'.format(account_cost))
+    account_profit = round(account_value - account_cost, 2)
+    print('Account total')
+    print('] {0: <12}:${1}'.format('investment', account_cost))
+    print('] {0: <12}:${1}'.format('value', account_value))
+    print('] {0: <12}:${1}'.format('profit', account_profit))
+    print(spacer_str)
 
     metal_holdings = dict(
             [(metal, sum([order.quantity(metal) for order in orders]))
                 for metal in config['metals']])
-    print('Metal holdings:')
+    print('Holdings')
     for metal in config['metals']:
-        print('{}: {}oz'.format(metal, metal_holdings[metal]))
+        print('] {0: <12}:{1}oz'.format(metal, metal_holdings[metal]))
+    print(spacer_str)
 
 
 def get_price_data(metals, sources):
