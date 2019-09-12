@@ -21,11 +21,18 @@ class Order(JSONSerialized):
         dict_in['content'] = OrderContents.from_list_dict(dict_in['content'])
         return cls(**dict_in)
 
-    def __init__(self, content):
+    def __init__(self, content, tax=0.0, ship=0.0):
         self.content = content
+        self.tax = tax
+        self.ship = ship
 
     def cost(self):
-        return round(sum([content.cost() for content in self.content]), 2)
+        return round(
+                sum(
+                    [content.cost() for content in self.content]) +
+                self.tax +
+                self.ship,
+                2)
 
     def value(self):
         '''
