@@ -58,7 +58,9 @@ def main():
     Order.set_assets(assets)
 
     account_value = round(sum([order.value() for order in orders]), 2)
+    account_cost = sum([order.cost() for order in orders])
     print('Total account value: ${}'.format(account_value))
+    print('Total account cost: ${}'.format(account_cost))
 
     metal_holdings = dict(
             [(metal, sum([order.quantity(metal) for order in orders]))

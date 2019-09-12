@@ -5,7 +5,7 @@
         "composition": {
             "silver": 0.999
         },
-        "weight": 1.0
+        "mass": 31.1035
     },
     {
         "token": "US_GOLD_EAGLE",
@@ -14,7 +14,7 @@
             "gold": 0.9167,
             "silver": 0.03
         },
-        "weight": 1.0909
+        "mass": 33.930
     },
     {
         "token": "US_GOLD_EAGLE_1/2oz",
@@ -23,7 +23,7 @@
             "gold": 0.9167,
             "silver": 0.03
         },
-        "weight": 0.5454
+        "mass": 16.965
     },
     {
         "token": "US_GOLD_EAGLE_1/4oz",
@@ -32,7 +32,7 @@
             "gold": 0.9167,
             "silver": 0.03
         },
-        "weight": 0.2727
+        "mass": 8.483
     },
     {
         "token": "US_GOLD_EAGLE_1/10oz",
@@ -41,6 +41,6 @@
             "gold": 0.9167,
             "silver": 0.03
         },
-        "weight": 0.1091
+        "mass": 3.393
     }
 ]

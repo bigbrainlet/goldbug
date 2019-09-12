@@ -5,7 +5,7 @@
         "composition": {
             "silver": 0.90
         },
-        "weight": 0.2204623
+        "mass": 6.25
     },
     {
         "token": "US_KHD_1964",
@@ -13,7 +13,7 @@
         "composition": {
             "silver": 0.90
         },
-        "weight": 0.4409245
+        "mass": 12.50
     },
     {
         "token": "US_KHD_1965-1970",
@@ -21,7 +21,7 @@
         "composition": {
             "silver": 0.40     
         },
-        "weight": 0.4056506
+        "mass": 11.50
     },
     {
         "token": "US_SWN",
@@ -29,6 +29,6 @@
         "composition": {
             "silver": 0.35
         },
-        "weight": 0.17637
+        "mass": 5.00
     }
 ]

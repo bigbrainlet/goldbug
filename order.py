@@ -24,17 +24,20 @@ class Order(JSONSerialized):
     def __init__(self, content):
         self.content = content
 
+    def cost(self):
+        return round(sum([content.cost() for content in self.content]), 2)
+
     def value(self):
         '''
         Return total value (USD) of order.
         '''
-        return sum([content.value() for content in self.content])
+        return round(sum([content.value() for content in self.content]), 2)
 
     def quantity(self, metal):
         '''
         Return the total quantity of given metal in this order.
         '''
-        return sum([each.metal_content(metal) for each in self.content])
+        return round(sum([each.metal_content(metal) for each in self.content]), 4)
 
 class OrderContents(JSONSerialized):
     '''
@@ -54,6 +57,9 @@ class OrderContents(JSONSerialized):
                 [self.__class__.price_data.get(metal, 0) * purity for
                     metal, purity in asset.composition.items()]) *
                 asset.weight * self.quantity)
+
+    def cost(self):
+        return self.rate * self.quantity
 
     def metal_content(self, metal):
         '''

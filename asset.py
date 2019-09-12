@@ -4,6 +4,8 @@ from common import JSONSerialized
 
 
 class Asset(JSONSerialized):
+    G_TO_TROY_OZ = 0.0321507
+
     @staticmethod
     def to_dict(asset_list):
         return dict([(asset.token, asset) for asset in asset_list])
@@ -12,10 +14,11 @@ class Asset(JSONSerialized):
     def to_list(asset_dict):
         return list(asset_dict.values())
 
-    def __init__(self, token, composition, weight, desc=''):
+    def __init__(self, token, composition, mass, desc=''):
         self.token = token
         self.composition = composition
-        self.weight = weight
+        self.mass = mass
+        self.weight = self.mass * self.__class__.G_TO_TROY_OZ
         self.desc = desc
 
 

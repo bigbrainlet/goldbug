@@ -5,7 +5,7 @@
         "composition": {
             "gold": 1.0
         },
-        "weight": 1.0
+        "mass": 31.1035
     },
     {
         "token": "silver",
@@ -13,7 +13,7 @@
         "composition": {
             "silver": 1.0
         },
-        "weight": 1.0
+        "mass": 31.1035
     },
     {
         "token": "platinum",
@@ -21,7 +21,7 @@
         "composition": {
             "platinum": 1.0
         },
-        "weight": 1.0
+        "mass": 31.1035
     },
     {
         "token": "palladium",
@@ -29,7 +29,7 @@
         "composition": {
             "palladium": 1.0
         },
-        "weight": 1.0
+        "mass": 31.1035
     },
     {
         "token": "rhodium",
@@ -37,6 +37,6 @@
         "composition": {
             "rhodium": 1.0
         },
-        "weight": 1.0
+        "mass": 31.1035
     }
 ]
