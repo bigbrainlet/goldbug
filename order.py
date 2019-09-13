@@ -61,7 +61,7 @@ class Account:
                     round(self.__class__.price_data.get(metal, 0),
                         self.__class__.PRICE_ROUND))
                     for metal in
-                    self.__class__.price_data],
+                    self.__class__.config['metals']],
                 sep,]
         print('\n'.join(to_print))
 
