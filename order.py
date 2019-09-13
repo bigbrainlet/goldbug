@@ -12,10 +12,10 @@ class Account:
     QUANTITY_ROUND = 4
     PRICE_ROUND = 2
 
-    sep_str = '=' * 30
+    sep_str = '=' * 28
     label_fmt = '{0: <12}'
     number_fmt = '{1: >12}'
-    amt_fmt = '] {}:{}'
+    amt_fmt = ']  {}:{}'
 
     @classmethod
     def set_price_data(cls, price_data):
@@ -47,16 +47,16 @@ class Account:
                 profit = ' ' * (13-len(profit)) + profit
         to_print = [
                 sep,
-                'Account total (USD)',
+                ' Account Total (USD)',
                 fmt.format('investment', cost),
                 fmt.format('value', value),
                 fmt.format('profit', profit),
                 sep,
-                'Holdings (Troy oz)',
+                ' Holdings (Troy oz)',
                 *[fmt.format(metal, self.holding(metal))
                     for metal in self.__class__.config['metals']],
                 sep,
-                'Price data (USD/Troy oz)',
+                ' Price Data (USD/Troy oz)',
                 *[fmt.format(metal,
                     round(self.__class__.price_data.get(metal, 0),
                         self.__class__.PRICE_ROUND))
