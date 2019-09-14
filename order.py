@@ -2,8 +2,7 @@
 
 from decimal import Decimal
 
-from common import JSONSerialized
-
+from decimal_json import JSONifyDecimal
 
 class Account:
     '''
@@ -81,7 +80,7 @@ class Account:
                 self.__class__.PRICE_ROUND)
 
 
-class Order(JSONSerialized):
+class Order(JSONifyDecimal):
     '''
     Represents a group of metal purchases.
     '''
@@ -96,10 +95,10 @@ class Order(JSONSerialized):
     @classmethod
     def from_dict(cls, dict_in):
         # Adjust json contents (list) to obj list
-        dict_in['content'] = OrderContents.from_list_dict(dict_in['content'])
+        dict_in['content'] = OrderContents.from_list(dict_in['content'])
         return cls(**dict_in)
 
-    def __init__(self, content, tax=0.0, ship=0.0):
+    def __init__(self, content, tax=Decimal(0.0), ship=Decimal(0.0)):
         self.content = content
         self.tax = Decimal(tax)
         self.ship = Decimal(ship)
@@ -124,14 +123,15 @@ class Order(JSONSerialized):
         '''
         return round(sum([each.metal_content(metal) for each in self.content]), 4)
 
-class OrderContents(JSONSerialized):
+
+class OrderContents(JSONifyDecimal):
     '''
     Represents a single asset being purchased within an order.
     '''
     def __init__(self, asset, quantity, rate):
         self.asset = asset
-        self.quantity = Decimal(quantity)
-        self.rate = Decimal(rate)
+        self.quantity = quantity
+        self.rate = rate
 
     def value(self):
         '''

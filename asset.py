@@ -2,19 +2,11 @@
 
 from decimal import Decimal
 
-from common import JSONSerialized
+from decimal_json import JSONifyDecimal
 
 
-class Asset(JSONSerialized):
+class Asset(JSONifyDecimal):
     G_TO_TROY_OZ = Decimal(0.0321507)
-
-    @staticmethod
-    def to_dict(asset_list):
-        return dict([(asset.token, asset) for asset in asset_list])
-
-    @staticmethod
-    def to_list(asset_dict):
-        return list(asset_dict.values())
 
     def __init__(self, token, composition, mass, desc=''):
         self.token = token

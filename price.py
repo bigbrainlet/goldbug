@@ -72,9 +72,9 @@ class PriceCache(JSONSerialized):
                     bid = ask = None
     
                 if spot:
-                    price_data[metal] = float(spot)
+                    price_data[metal] = Decimal(spot)
                 elif bid and ask:
-                    price_data[metal] = (float(bid)+float(ask))/2
+                    price_data[metal] = (Decimal(bid)+Decimal(ask))/2
                 else:
                     print('Unable to retrieve price data for {} from {}'.format(metal, source))
                     break

@@ -31,10 +31,11 @@ def main():
     order_files = glob.glob(order_dir)
 
     assets = list_sum(
-            [Asset.from_json_list_file(asset_file) for asset_file in asset_files])
-    assets = Asset.to_dict(assets)
+            [Asset.read(asset_file) for asset_file in asset_files])
+    assets = dict(
+            [(asset.token, asset) for asset in assets])
     orders = list_sum(
-            [Order.from_json_list_file(order_file) for order_file in order_files])
+            [Order.read(order_file) for order_file in order_files])
 
     Order.set_assets(assets)
 
