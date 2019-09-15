@@ -7,10 +7,10 @@ import time
 
 import requests
 
-from common import JSONSerialized
+from decimal_json import JSONifyDecimal
 
 
-class PriceCache(JSONSerialized):
+class PriceCache(JSONifyDecimal):
     filename = '.cache.json'
     json_attrs = ['updated', 'price_data']
     config = {}
@@ -21,21 +21,22 @@ class PriceCache(JSONSerialized):
             with open(cls.filename, 'r') as f:
                 return cls.from_dict(json.load(f))
         except FileNotFoundError:
-            return cls(0, {})
+            return cls.from_dict(
+                    {
+                        'updated': 0,
+                        'price_data': {},
+                        })
 
     def write(self):
         with open(self.__class__.filename, 'w') as f:
-            to_write = self.to_dict()
-            to_write['price_data'] = dict(
-                    [(key, str(value)) for key, value in to_write['price_data'].items()])
-            json.dump(to_write, f, **self.__class__.dump_kwargs)
+            json.dump(self.to_dict(), f, **self.__class__.json_kwargs)
 
     def __init__(self, updated, price_data):
         self.updated = updated
-        self.price_data = dict(
-                [(metal, Decimal(price)) for metal, price in price_data.items()])
+        self.price_data = price_data
         if (not self.price_data or
-                abs(time.time() - updated) > self.__class__.config['cache_update']):
+                abs(time.time() - float(updated)) >
+                self.__class__.config['cache_update']):
             self.generate()
             self.write()
 
